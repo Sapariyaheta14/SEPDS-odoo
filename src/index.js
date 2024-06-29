@@ -4,8 +4,21 @@ const mongoose=require("mongoose")
 const nodemon=require("nodemon")
 const path =require("path")
 const hbs=require("hbs")
+const multer=require("multer")
 const LogInCollection = require("./mongodb")
 const templatePath=path.join(__dirname,'../templates')
+
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      return cb(null, '/SEPDS-odoo/my-uploads');
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
+      cb(null, file.fieldname + '-' + uniqueSuffix)
+    }
+  })
+  const upload = multer({ storage: storage })
 
 const app=express()
 app.use(express.json())
@@ -30,13 +43,26 @@ app.post("/signup",async (req,res) => {
     res.render("signup")
 })
 
+app.post("/admin",upload.single('name'),async (req,res) => {
+    const data={
+        papername : req.body.papername,
+        assignname : req.body.assignname,
+        date: req.body.date,
+        time: req.body.time
+    }
+    
+    await Collection.insertMany([data])
+    res.render("/")
+})
+
+
 app.post('/login', async (req, res) => {
 
     try {
         const check = await LogInCollection.findOne({ name: req.body.name })
 
-        if (check.password === req.body.password) {
-            res.status(201).render("home", { naming: `${req.body.password}+${req.body.name}` })
+        if (check.password === req.body.password && req.body.box==="Administrator") {
+            res.render("dashboard")
         }
 
         else {

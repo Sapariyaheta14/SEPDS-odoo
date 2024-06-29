@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<title>dashboard</title>-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        
+        <div class="container">
+            <div class="title">Dashboard</div>
+            <div class="buttons">
+                <button class="btn">Upload</button>
+                <button class="btn">Update</button>
+            </div>
+    </header>
+    <main>
+        <form id="userForm " action="/admin" method="post" >
+            <div class="form-group">
+                <label for="fullName">Paper Name</label>
+                <input type="text" id="fullName" name="papername" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="channelName">Assign To</label>
+                <input type="text" id="channelName" name="assignname" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="backgroundImage">Paper Upload</label>
+                <input type="file" id="backgroundImage" name="name" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label>Enter the Date</label><br>
+                <input id="inputDob" 
+                       type="date" 
+                       value="2000-01-01" name="date" />
+            </div>
+            <div class="form-group">
+                <label for="appt">Select a time:</label>
+                <input type="time" id="appt" name="time">
+            </div>
+            <button type="submit">submit</button>
+        </form>
+
+</body>
+    </main>
+    <script>
+        document.getElementById('userForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    alert('Form submitted!');
+});
+    </script>
+</body>
+</html>
+</body>
+</html>

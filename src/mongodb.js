@@ -21,4 +21,24 @@ const logInSchema=new mongoose.Schema({
 
 const LogInCollection=new mongoose.model('LogInCollection',logInSchema)
 
+const Schema=new mongoose.Schema({
+    papername:{
+        type:String,
+        required:true
+    },
+    assignname:{
+        type:String,
+        required:true
+    },
+    date:{
+        type:Date,
+        required:true
+    },
+
+    time:{
+        type:Int16Array,
+        required:true
+    }
+})
+const Collection=new mongoose.model('Collection',Schema)
 module.exports=LogInCollection
