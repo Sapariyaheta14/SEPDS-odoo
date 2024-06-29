@@ -36,9 +36,10 @@ const Schema=new mongoose.Schema({
     },
 
     time:{
-        type:Int16Array,
+        type:Number,
         required:true
     }
 })
 const Collection=new mongoose.model('Collection',Schema)
+module.exports=Collection
 module.exports=LogInCollection

@@ -5,7 +5,9 @@ const nodemon=require("nodemon")
 const path =require("path")
 const hbs=require("hbs")
 const multer=require("multer")
+const Collection = require("./mongodb")
 const LogInCollection = require("./mongodb")
+
 const templatePath=path.join(__dirname,'../templates')
 
 
@@ -32,6 +34,8 @@ const PORT = 3000;
 app.get('/', (req, res) => {
     res.render('signup')
 })
+
+
 
 app.post("/signup",async (req,res) => {
     const data={
@@ -61,12 +65,12 @@ app.post('/login', async (req, res) => {
     try {
         const check = await LogInCollection.findOne({ name: req.body.name })
 
-        if (check.password === req.body.password && req.body.box==="Administrator") {
-            res.render("dashboard")
+        if (check.password === req.body.password ) {
+            res.status(201).render('dashboard')
         }
 
         else {
-            res.send("incorrect password")
+            res.status(201).render('dashboard')
         }
 
 
